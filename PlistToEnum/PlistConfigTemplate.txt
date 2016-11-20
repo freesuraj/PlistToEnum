@@ -1,0 +1,61 @@
+"import Foundation\n" +
+"\n" +
+"protocol PathType {}\n" +
+"extension Int: PathType {}\n" +
+"extension String: PathType {}\n" +
+
+"public enum PKeys {\n" +
+"{CASES}\n" +
+ "\n" +
+"var keys: [PathType] {\n" +
+"switch self {\n" +
+"{CASESRESULTS}\n" +
+"}\n" +
+"}\n" +
+"\n" +
+"}\n" +
+"\n"+
+
+"class PlistConfig {\n" +
+"\n" +
+"\t let plistOutput: Any\n" +
+"\n" +
+"\t private init() {\n" +
+    "if let url = Bundle.main.url(forResource: \"{FILENAME}\", withExtension: \"plist\") {\n" +
+            "if let dict = NSDictionary(contentsOf: url) as? [String: Any] {\n" +
+                "plistOutput = dict\n" +
+            "} else if let array = NSArray(contentsOf: url) as? [Any] {\n" +
+                "plistOutput = array\n" +
+            "} else {\n" +
+                "plistOutput = []\n" +
+            "}\n" +
+        "} else {\n" +
+            "plistOutput = []\n" +
+        "}\n" +
+    "}\n" +
+"\n" +
+"\n" +
+"\t func valueFor(_ keyPath: [PathType]) -> Any? {\n" +
+        "let count = keyPath.count\n" +
+        "var finalValue: Any? = plistOutput\n" +
+        "for i in 0..<count {\n" +
+            "let path = keyPath[i]\n" +
+            "if let dictPath = path as? String {\n" +
+                "if let newValue = finalValue as? [String: Any] {\n" +
+                    "finalValue = newValue[dictPath]\n" +
+                "} else {\n" +
+                    "return nil\n" +
+                "}\n" +
+            "} else if let arrayPath = path as? Int {\n" +
+                "if let newValue = finalValue as? [Any], arrayPath < newValue.count {\n" +
+                    "finalValue = newValue[arrayPath]\n" +
+                "} else {\n" +
+                    "return nil\n" +
+                "}\n" +
+            "}\n" +
+        "}\n" +
+        "return finalValue\n" +
+    "}\n" +
+"\n" +
+"}\n" +
+"\n"
