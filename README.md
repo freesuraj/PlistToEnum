@@ -1,6 +1,6 @@
 ### PlistEnum
 
-This is a script used to generate swift `enum` from a `.plist` file. Please read the detail of implementation at my [blog](https://freesuraj.github.io.com/2016/11/20/plistEnum/)
+This is a script used to generate swift `enum` from a `.plist` file. Please read the detail of implementation at my [blog](https://freesuraj.github.io/2016/11/20/plistEnum/)
 
 
 ## About
