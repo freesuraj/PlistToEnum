@@ -69,7 +69,7 @@ let template: String = "\n" +
             "\t\t return finalValue\n" +
         "\t\t }\n" +
         "\n" +
-    "\t }\n" +
+"}\n" +
 "\n"
 
 
@@ -182,7 +182,6 @@ class PlistEnum {
         let contentCases = content.replacingOccurrences(of: "{CASES}", with: cases.joined(separator: "\n"))
         let finalContent = contentCases.replacingOccurrences(of: "{CASESRESULTS}", with: caseResult.joined(separator: "\n"))
         let output = Bundle.main.bundlePath
-        print("open \(output + "/PListConfig.swift")")
         let _ = File.write(path: output + "/PListConfig.swift", content: finalContent )
     }
     
